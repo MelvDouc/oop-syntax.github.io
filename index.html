@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>OOP Syntax</title>
+</head>
+<body>
+
+    <h1>OOP Syntax</h1>
+
+    
+    <main>
+        <ul>
+            <h2>Classes & Objects</h2>
+
+            <li>
+    class ClassName{
+        <g>Properties</g>
+        public $property1;
+        public $property2;
+
+        <g>Methods</g>
+        function set_property1($property1){
+            $this->property1 = $property1;
+        }
+        function get_property1(){
+            return $this->property1;
+        }
+    }
+            </li>
+            <li>
+    $object1 = new ClassName();
+    $object2 = new ClassName();
+    $object1->set_property1('Value 1');
+    $object1->set_property2('Value 2');
+
+    echo $object1->get_property1(); <g>"Value 1"</g>
+    echo $object2->get_property2(); <g>"Value 2"</g>
+            </li>
+            <li>
+    Two ways to change the value of $property1:
+    - class ClassName{
+        &hellip;
+        function set_property1($property1){
+            $this->property1 = $property1;
+        }
+    }
+    $object1->set_property1('Value 1');
+    - class ClassName{
+        public $property1;
+    }
+    $object1 = new ClassName();
+    $object1->property1 = 'Value 1';
+            </li>
+            <li>
+    $object1 = new ClassName();
+    var_dump($object1 <bl>instanceof</bl> ClassName);
+    <g>Checks whether object belongs to specified class.</g>
+            </li>
+        </ul>
+
+        <ul>
+            <h2>Constructors & Destructors</h2>
+    
+            <li>
+    class ClassName{
+        public $property1;
+        public $property2;
+
+        function <mark>__construct</mark>($property1){
+            $this->property1 = $property1;
+            $this->property2 = $property2;
+        }
+
+        function get_property1(){
+            return $this->name;
+        }
+    }
+
+    $object1 = new ClassName('Value 1', 'value 2');
+    echo $object1->get_property1(); <g>"Value 1"</g>
+    echo $object2->get_property2(); <g>"value 2"</g>
+            </li>
+            <li>
+    ClassName{
+        public $property1;
+        public $property2;
+
+        function __construct($property1){
+            $this->property1 = $property1;
+        }
+
+        function <mark>__destruct</mark>(){ <g>The __destruct() function will automatically be called at the end of the script.</g>
+            echo "This object is {$this->property1}.";
+        }
+    }
+
+    $object1 = new ClassName2('Value'); // "This object is Value."
+            </li>
+        </ul>
+        
+        <ul>
+            <h2>Access Modifiers</h2>
+    
+            <li>
+    class ClassName{
+        <bl>public</bl> $property1;
+        <bl>private</bl> $property2;
+        <bl>protected</bl> $property3;
+    }
+
+    $object1 = new ClassName();
+    $object1->property1 = 'value 1'; <g>OK: The property is public.</g>
+    $object2->property2 = 'value 2'; <g>Error: The property and method can only be accessed within the class.</g>
+    $object3->property3 = 'value 3'; <g>Error: The property and method can only be accessed within the class and <mark>within</mark> classes derived from the class (inside the {}).</g>
+            </li>
+        </ul>
+
+        
+        <ul>
+            <div class="h2-p">
+    
+                <h2>Inheritance</h2>
+                
+                <p><u>Definition</u>: The fact for a class to be derived from another class.</p>
+                <p>The child class will inherit all the public and protected properties and methods from the parent class. In addition, it can have its own properties and methods.</p>
+                <p>An inherited class is defined by using the <mark>extends</mark> keyword.</p>
+    
+            </div>
+
+            <li>
+    class ClassName{
+        public $property1;
+
+        public function __construct($property1){
+            $this->property1 = $property1;
+        }
+
+        public function get_property1(){
+            echo $this->property1;
+        }
+    }
+
+    class InheritedClass <bl>extends</bl> ClassName{
+        public function echo_message(){
+            echo 'A message.';
+        }
+    }
+
+    $inherited_object = new InheritedClass('value 1');
+    $inherited_object->echo_message(); <g>"A message."</g>
+    $inherited_object->get_property1(); <g>"value 1"</g>
+            </li>
+            <li>
+    class ClassName{
+        public $property1;
+
+        public function __construct($property1){
+            $this->property1 = $property1;
+        }
+    }
+    class InheritedClass extends ClassName{
+        public $property2;
+
+        public function __construct($property2){ <g>Overrides similar inherited method.</g>
+            $this->property2 = $property2;
+        }
+    }
+            </li>
+            <li>
+    <bl>final</bl> class ClassName { <g>Prevent class inheritance and method overriding.</g>
+    
+        <g>&hellip;</g>
+    };
+    
+    class ClassName{
+        <bl>final</bl> public function echo_message{
+            <g>&hellip;</g>
+        }
+    }
+    class InheritedClass extends ClassName{
+        public function echo_message(){ <g>Will result in error.</g>
+            <g>&hellip;</g>
+        }
+    }
+            </li>
+        </ul>
+
+        <ul>
+            <h2>Class Constants</h2>
+
+            <li>
+        class ClassName{
+            <bl>const</bl> MY_MESSAGE = 'Lorem ipsum dolor sit amet.';
+        }
+
+        echo ClassName<mark>::</mark>MY_MESSAGE; <g>scope resolution operator</g>
+            </li>
+            <li>
+        class ClassName{
+            const MY_MESSAGE = 'Lorem ipsum dolor sit amet.';
+            public function echo_message(){
+                echo <mark>self</mark>::MY_MESSAGE; <g><u>self</u> =&thinsp;ClassNamee</g>
+            }
+        }
+
+        $object = new ClassName();
+        $object->echo_message();
+            </li>
+        </ul>
+
+        <ul>
+            <h2>Abstract Classes</h2>
+
+            <li>
+
+            </li>
+            <li>
+                
+            </li>
+        </ul>
+    </main>
+
+</body>
+</html>
