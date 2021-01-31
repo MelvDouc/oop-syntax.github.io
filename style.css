@@ -45,10 +45,10 @@ ul {
     color: #fff;
     margin-top: .42em;
     padding-left: 0;
-    break-inside: avoid;
 }
 
 li {
+    break-inside: avoid;
     margin-left: 1em;
     font-family: Consolas, monospace;
     white-space: pre-wrap;
@@ -69,4 +69,8 @@ g {
 
  g::before {
      content: '// ';
+ }
+
+ .m-0 {
+     margin-block: 0;
  }

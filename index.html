@@ -202,7 +202,7 @@
         class ClassName{
             const MY_MESSAGE = 'Lorem ipsum dolor sit amet.';
             public function echo_message(){
-                echo <mark>self</mark>::MY_MESSAGE; <g><u>self</u> =&thinsp;ClassNamee</g>
+                echo <mark>self</mark>::MY_MESSAGE; <g><u>self</u> =&thinsp;ClassName</g>
             }
         }
 
@@ -212,13 +212,129 @@
         </ul>
 
         <ul>
-            <h2>Abstract Classes</h2>
+            <div class="h2-p">
+                <h2>Abstract Classes</h2>
+
+                <p>An abstract class is a parent class that has a child class fill out the tasks for it. It contains at least one abstract method, which is declared but not implemented in the code.</p>
+                <p>An abstract class or method is declared using the keyword <mark>abstract</mark>.</p>
+            </div>
 
             <li>
-
+    abstract class ParentClass{
+        abstract public function method1();
+        abstract public function method2($property1, $property2);
+    }
             </li>
             <li>
-                
+    abstract class ParentClass{
+        public $property;
+        public function __construct($property){
+            $this->property = $property;
+        }
+        abstract public function my_method() : string;
+    }
+
+    class ChildClass1 extends ParentClass{
+        public function my_method() : string{
+            return $this->property;
+        }
+    }
+    class ChildClass2 extends ParentClass{
+        public function my_method() : string{
+            return $this->property;
+        }
+    }
+            </li>
+            <li>
+    $object1 = new ChildClass1('Value 1');
+    echo object1->my_method(); <g>"Value 1"</g>
+    $object2 = new ChildClass2('Value 2');
+    echo object2->my_method(); <g>"Value 2"</g>
+            </li>
+        </ul>
+        <ul>
+            <li>
+    abstract class ParentClass{
+        abstract protected function get_absolute_value($nb);
+    }
+    class ChildClass extends ParentClass{
+        public function get_absolute_value($nb){
+            if($nb &lt; 0){
+                $nb = $nb * -1;
+                return $nb;
+            } else{
+                return $nb;
+            }
+        }
+    }
+
+    $object1 = new ChildClass();
+    echo $object1->get_absolute_value(3); <g>"3"</g>
+    $object2 = new ChildClass();
+    echo $object2->get_absolute_value(-7); <g>"7"</g>
+            </li>
+            <li>
+    class ChildClass extends ParentClass{
+        public function get_absolute_value($nb, $message = 'absolute value is:'){ <g>The child can define its own optional arguments which it didin't inherit from the parent class.</g>
+            if($nb &lt; 0){
+                $nb = $nb * -1;
+                return $message.$nb;
+            } else{
+                return $message.$nb;
+            }
+        }
+    }
+            </li>
+        </ul>
+
+        <ul>
+            <div class="h2-p">
+                <h2>Interfaces</h2>
+                <p>Interfaces allow you to specify what methods a class should implement.</p>
+                <p>Interfaces make it easy to use a variety of different classes in the same way. When one or more classes use the same interface, it is referred to as "polymorphism".</p>
+                <p>Interfaces are declared with the <mark>interface</mark> keyword.</p>
+            </div>
+
+            <li>
+    interface InterfaceName{
+        public function method1();
+        public function method2($property1, $property2);
+        public function method3() : string;
+    }
+            </li>
+        </ul>
+        
+        <p>Interface are similar to abstract classes. The differences between them are:</p>
+        <p class="m-0">-interfaces cannot have properties;</p>
+        <p class="m-0">-all interface methods must be public, while abstract class methods are public or protected;</p>
+        <p class="m-0">-all methods in an interface are abstract, so they cannot be implemented in code and the <bl>abstract</bl> keyword is not necessary;</p>
+        <p class="m-0">-classes can implement an interface while inheriting from another class at the same time.</p>
+
+        <ul>
+            <li>
+    interface InterfaceName{
+        public function my_method();
+    }
+
+    class ClassName1 <bl>implements</bl> InterfaceName{
+        public function my_method(){
+            echo 'My message1';
+        }
+    }
+
+    class ClassName2 implements InterfaceName{
+        public function my_method(){
+            echo 'My message2';
+        }
+    }
+
+    $object1 = new ClassName1();
+    $object2 = new ClassName2();
+    $object3 = new ClassName3();
+    $objects = array($object1, $object2, $object3)
+    foreach($objects as $object){
+        $object->my_method();
+    }
             </li>
         </ul>
     </main>
